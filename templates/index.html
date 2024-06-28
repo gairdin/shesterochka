@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/img/favicon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>Шестёрочка</title>
+</head>
+<body>
+<header class="header" id="header">
+    <nav class="nav container">
+        <a href="#" class="nav__logo">Шестёрочка</a>
+        <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+                <li class="nav__item"><a href="#home" class="nav__link active-link">Главная</a></li>
+                <li class="nav__item"><a href="#about" class="nav__link">О нас</a></li>
+                <li class="nav__item"><a href="#popular" class="nav__link">Акции</a></li>
+                <li class="nav__item"><a href="#join" class="nav__link">Подписка</a></li>
+            </ul>
+            <div class="nav__close" id="nav-close"><i class="ri-close-line"></i></div>
+            <div class="nav__toggle" id="nav-toggle"><i class="ri-menu-fill"></i></div>
+        </div>
+    </nav>
+</header>
+
+<main class="main">
+    <section class="home section" id="home">
+        <img src="/static/img/kandinsky-download-1715441875234.png" alt="home" class="home__bg">
+        <div class="home__shadow"></div>
+        <div class="home__container container grid">
+            <div class="home__data">
+                <h3 class="home__subtitle">Добро пожаловать в Шестёрочка</h3>
+                <h1 class="home__title">Питайтесь<br>правильно</h1>
+                <p class="home__description">
+                    Питание, богатое питательными веществами, помогает укрепить иммунную систему, повысить энергию и
+                    снизить риск развития хронических заболеваний, таких как диабет и сердечно-сосудистые заболевания.
+                </p>
+            </div>
+            <div class="home__cards grid">
+            </div>
+        </div>
+    </section>
+
+    <section class="about section" id="about">
+        <div class="about__container container grid">
+            <div class="about__data">
+                <h2 class="section__title">О нас</h2>
+                <p class="about__description">
+                    Магазин здорового питания "Шестёрочка" - это ваш надёжный партнёр в стремлении к здоровому образу
+                    жизни. Мы предлагаем широкий выбор свежих, качественных и натуральных продуктов, которые помогут вам
+                    достичь своих целей в питании. В "Шестёрочке" вы найдёте все необходимое для балансированного
+                    рациона, который подарит вам заряд энергии и радости каждый день.
+                </p>
+            </div>
+            <div class="about__image">
+                <img src="/static/img/salad_bowl_food_vegetables_vegan_healthy_food_icon_208011.svg" alt="about image" class="about__img">
+                <div class="about__shadow"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="popular section" id="popular">
+        <h2 class="section__title">Акции</h2>
+        <div id="popular-container" class="popular__container container grid">
+            <!-- Карточки акций будут добавлены динамически -->
+        </div>
+    </section>
+
+
+    <section class="join section" id="join">
+        <div class="join__container container grid">
+            <div class="join__data">
+                <h2 class="section__title">Подписка на акции</h2>
+                <p class="join__description">Подпишитесь, чтобы получать свежие предложения и скидки.</p>
+                <form id="subscription-form" class="join__form">
+                    <input type="text" id="name" name="name" class="join__input" placeholder="Ваше имя" required>
+                    <input type="email" id="email" name="email" class="join__input" placeholder="Ваш email" required>
+                    <button type="submit" class="join__button button">Подписаться <i class="ri-arrow-right-line"></i>
+                    </button>
+                </form>
+                <!-- Уведомление об успешной подписке -->
+                <div id="subscription-notification" style="display: none;">
+                    <p>Вы успешно подписались на рассылку!</p>
+                </div>
+            </div>
+            <div class="join__image">
+                <img src="/static/img/free-icon-message-5249273.png" alt="join image" class="join__img">
+                <div class="join__shadow"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer__container container grid">
+        <div class="footer__content grid">
+            <div>
+                <a href="#" class="footer__logo">Шестёрочка</a>
+                <p class="footer--description">
+                    Ваш магазин здорового питания. У нас всегда свежие и качественные продукты.
+                </p>
+            </div>
+            <div class="footer__data grid">
+                <div>
+                    <h3 class="footer__title">О нас</h3>
+                    <ul class="footer_links">
+                        <li><a href="#" class="footer_link">Наши ценности</a></li>
+                        <li><a href="#" class="footer_link">Отзывы</a></li>
+                        <li><a href="#" class="footer_link">Новости</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer__title">Компания</h3>
+                    <ul class="footer_links">
+                        <li><a href="#" class="footer_link">Часто задаваемые вопросы</a></li>
+                        <li><a href="#" class="footer_link">История</a></li>
+                        <li><a href="#" class="footer_link">Контакты</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer__title">Контакты</h3>
+                    <ul class="footer_links">
+                        <li><a href="#" class="footer_link">Колл-центр</a></li>
+                        <li><a href="#" class="footer_link">Служба поддержки</a></li>
+                        <li><a href="#" class="footer_link">Свяжитесь с нами</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer__title">Поддержка</h3>
+                    <ul class="footer_links">
+                        <li><a href="#" class="footer_link">Политика конфиденциальности</a></li>
+                        <li><a href="#" class="footer_link">Условия использования</a></li>
+                        <li><a href="#" class="footer_link">Оплата</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__group">
+                <div class="footer__social">
+                    <a href="#" target="_blank" class="footer__social-link"><i class="ri-instagram-line"></i></a>
+                    <a href="#" target="_blank" class="footer__social-link"><i class="ri-twitter-line"></i></a>
+
+
+                    <a href="https://www.youtube.com/" target="_blank" class="footer__social-link"><i
+                            class="ri-youtube-line"></i></a>
+                </div>
+                <span class="footer__copy">© 2024 Шестёрочка. Все права защищены.</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<a href="#" class="scrollup" id="scroll-up"><i class="ri-arrow-up-line"></i></a>
+<script src="/static/js/main.js"></script>
+<script src="/static/js/db.js"></script>
+<script>
+    document.getElementById("subscription-form").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        try {
+            const response = await fetch("/register/", {
+                method: "POST",
+                body: formData
+            });
+            if (response.ok) {
+                // Показываем уведомление об успешной подписке
+                document.getElementById("subscription-notification").style.display = "block";
+                // Очищаем поля формы после успешной подписки
+                this.reset();
+            }
+        } catch (error) {
+            console.error('Ошибка:', error);
+        }
+    });
+</script>
+
+</body>
+</html>

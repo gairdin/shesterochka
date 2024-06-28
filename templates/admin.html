@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отправка акций</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+<div class="container">
+    <h1>Отправка акций</h1>
+    <div id="promotions-container" class="grid">
+        <!-- Promotions will be dynamically added here -->
+    </div>
+    <div>
+        <h2>Загрузить акции из файла</h2>
+        <form id="upload-form">
+            <input type="file" id="file-input" name="file" accept=".txt">
+            <button type="submit">Загрузить и отправить акции</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    async function loadPromotions() {
+        try {
+            const response = await fetch('/promotions');
+            if (!response.ok) {
+                throw new Error('Ошибка при загрузке акций');
+            }
+            const promotions = await response.json();
+            const container = document.getElementById("promotions-container");
+            container.innerHTML = ''; // Clear container before adding new promotions
+            promotions.forEach(promotion => {
+                const card = document.createElement("div");
+                card.classList.add("card");
+                card.innerHTML = `
+                    <img src="${promotion.image_url}" alt="${promotion.title}">
+                    <div class="card-content">
+                        <h3>${promotion.title}</h3>
+                        <p>${promotion.description}</p>
+                        <p><strong>Начало:</strong> ${promotion.start_date}</p>
+                        <p><strong>Окончание:</strong> ${promotion.end_date}</p>
+                        <div class="buttons">
+                            <button class="btn btn-success" onclick="sendPromotion('${promotion._id}')">Отправить</button>
+                            <button class="btn btn-danger" onclick="deletePromotion('${promotion._id}')">Удалить</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        } catch (error) {
+            console.error('Ошибка при загрузке акций:', error);
+        }
+    }
+
+    async function sendPromotion(promotionId) {
+        if (confirm("Вы уверены, что хотите отправить эту акцию всем пользователям?")) {
+            try {
+                const response = await fetch(`/promotions/send/${promotionId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    console.log(`Акция с ID ${promotionId} успешно отправлена`);
+                    alert(`Акция с ID ${promotionId} успешно отправлена`);
+                } else {
+                    console.error(`Ошибка при отправке акции с ID ${promotionId}`);
+                    alert(`Ошибка при отправке акции с ID ${promotionId}`);
+                }
+            } catch (error) {
+                console.error(`Ошибка при отправке акции с ID ${promotionId}:`, error);
+                alert(`Ошибка при отправке акции с ID ${promotionId}: ${error.message}`);
+            }
+        }
+    }
+
+    async function deletePromotion(promotionId) {
+        if (confirm("Вы уверены, что хотите удалить эту акцию?")) {
+            try {
+                const response = await fetch(`/promotions/${promotionId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (response.ok) {
+                    console.log(`Акция с ID ${promotionId} успешно удалена`);
+                    alert(`Акция с ID ${promotionId} успешно удалена`);
+                    await loadPromotions(); // Reload promotions after deletion
+                } else {
+                    console.error(`Ошибка при удалении акции с ID ${promotionId}`);
+                    alert(`Ошибка при удалении акции с ID ${promotionId}`);
+                }
+            } catch (error) {
+                console.error(`Ошибка при удалении акции с ID ${promotionId}:`, error);
+                alert(`Ошибка при удалении акции с ID ${promotionId}: ${error.message}`);
+            }
+        }
+    }
+
+    async function uploadFile(event) {
+        event.preventDefault();
+        const fileInput = document.getElementById('file-input');
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        try {
+            const response = await fetch('/promotions/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                console.log('Файл успешно загружен и акции отправлены');
+                alert('Файл успешно загружен и акции отправлены');
+                await loadPromotions(); // Reload promotions after upload
+            } else {
+                console.error('Ошибка при загрузке файла');
+                alert('Ошибка при загрузке файла');
+            }
+        } catch (error) {
+            console.error('Ошибка при загрузке файла:', error);
+            alert('Ошибка при загрузке файла:', error.message);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadPromotions);
+    document.getElementById('upload-form').addEventListener('submit', uploadFile);
+</script>
+
+</body>
+</html>
